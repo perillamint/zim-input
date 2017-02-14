@@ -102,25 +102,25 @@ if [[ -n "${key_info[BackTab]}" ]]; then
   bindkey "${key_info[BackTab]}" reverse-menu-complete
 fi
 
-# Redisplay after completing, and avoid blank prompt after <Tab><Tab><Ctrl-C>
-expand-or-complete-with-redisplay() {
-  print -n '...'
-  zle expand-or-complete
-  zle redisplay
-}
-zle -N expand-or-complete-with-redisplay
-bindkey "${key_info[Control]}I" expand-or-complete-with-redisplay
-
-# Put into application mode and validate ${terminfo}
-zle-line-init() {
-  if (( ${+terminfo[smkx]} )); then
-    echoti smkx
-  fi
-}
-zle-line-finish() {
-  if (( ${+terminfo[rmkx]} )); then
-    echoti rmkx
-  fi
-}
-zle -N zle-line-init
-zle -N zle-line-finish
+## Redisplay after completing, and avoid blank prompt after <Tab><Tab><Ctrl-C>
+#expand-or-complete-with-redisplay() {
+#  print -n '...'
+#  zle expand-or-complete
+#  zle redisplay
+#}
+#zle -N expand-or-complete-with-redisplay
+#bindkey "${key_info[Control]}I" expand-or-complete-with-redisplay
+#
+## Put into application mode and validate ${terminfo}
+#zle-line-init() {
+#  if (( ${+terminfo[smkx]} )); then
+#    echoti smkx
+#  fi
+#}
+#zle-line-finish() {
+#  if (( ${+terminfo[rmkx]} )); then
+#    echoti rmkx
+#  fi
+#}
+#zle -N zle-line-init
+#zle -N zle-line-finish
