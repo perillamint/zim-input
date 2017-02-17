@@ -54,10 +54,12 @@ for key in "${(s: :)key_info[ControlRight]}"; do
 done
 
 if [[ -n "${key_info[Home]}" ]]; then
+  bindkey "^[[H" beginning-of-line
   bindkey "${key_info[Home]}" beginning-of-line
 fi
 
 if [[ -n "${key_info[End]}" ]]; then
+  bindkey "^[[F" end-of-line
   bindkey "${key_info[End]}" end-of-line
 fi
 
@@ -110,17 +112,17 @@ fi
 #}
 #zle -N expand-or-complete-with-redisplay
 #bindkey "${key_info[Control]}I" expand-or-complete-with-redisplay
-#
-## Put into application mode and validate ${terminfo}
-#zle-line-init() {
-#  if (( ${+terminfo[smkx]} )); then
-#    echoti smkx
-#  fi
-#}
-#zle-line-finish() {
-#  if (( ${+terminfo[rmkx]} )); then
-#    echoti rmkx
-#  fi
-#}
-#zle -N zle-line-init
-#zle -N zle-line-finish
+
+# Put into application mode and validate ${terminfo}
+zle-line-init() {
+  if (( ${+terminfo[smkx]} )); then
+    echoti smkx
+  fi
+}
+zle-line-finish() {
+  if (( ${+terminfo[rmkx]} )); then
+    echoti rmkx
+  fi
+}
+zle -N zle-line-init
+zle -N zle-line-finish
